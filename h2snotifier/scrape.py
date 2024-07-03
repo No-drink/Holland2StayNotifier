@@ -272,7 +272,11 @@ Contract type: {house['contract_type']}
 # Define the GraphQL query payload
 def scrape(cities=[], page_size=30):
     payload = generate_payload(cities, page_size)
-    response = requests.post("https://api.holland2stay.com/graphql/", json=payload)
+    headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+    'Content-Type': 'application/json'
+    }
+    response = requests.post("https://api.holland2stay.com/graphql/", headers=headers, json=payload)
     data = response.json()["data"]
     cities_dict = {}
     for c in cities:
